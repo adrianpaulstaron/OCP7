@@ -19,15 +19,10 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 
-// let sequelize;
-// async function sequelizeImport() {
-// }
-// sequelizeImport() 
 
 const usersRoutes = require('./routes/users')
 const postsRoutes = require('./routes/posts')
 const commentsRoutes = require('./routes/comments')
-
 
 
 async function CoTest() {
@@ -72,5 +67,6 @@ app.use(express.json())
 //   await mongoose.connect(process.env.DB_CONNECT_URI);
 // }
 
+app.use('/api/users', usersRoutes)
 
 module.exports = app; 

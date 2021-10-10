@@ -6,15 +6,26 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
   dialect: 'mysql'
 });
 
-module.export = 
-    sequelize.define('User', {
+module.exports = 
+    sequelize.define('users', {
         // Model attributes are defined here
-        firstName: {
+        firstname: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        lastName: {
-          type: DataTypes.STRING
-          // allowNull defaults to true
+        surname: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
-      })
+        }, {
+            timestamps: false
+        }
+    )
