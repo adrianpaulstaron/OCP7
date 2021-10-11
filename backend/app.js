@@ -68,5 +68,7 @@ app.use(express.json())
 // }
 
 app.use('/api/users', usersRoutes)
+app.use('/api/posts', postsRoutes)
+app.use('/api/comments', commentsRoutes)
 
 module.exports = app; 

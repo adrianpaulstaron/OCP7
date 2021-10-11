@@ -7,21 +7,17 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 });
 
 module.exports = 
-    sequelize.define('users', {
-        firstname: {
+    sequelize.define('posts', {
+        title: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        surname: {
+        text: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        password: {
-            type: DataTypes.STRING,
+        user_id: {
+            type: DataTypes.NUMBER,
             allowNull: false
         }
         }, {
