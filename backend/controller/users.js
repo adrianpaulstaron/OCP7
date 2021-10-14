@@ -25,7 +25,6 @@ exports.login = async (req, res, next) => {
     }
   })
   .then(user => {
-    // lorsque l'utilisateur n'est pas trouvé, sequelize renvoie un string vide, on check dessus pour envoyer une réponse appropriée
     if(user){
       console.log("user: ", user)
       // on utilise bcrypt pour comparer les mots de passe hachés respectivement entré par l'utilisateur et stocké en base
