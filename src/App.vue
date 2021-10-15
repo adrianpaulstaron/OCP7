@@ -1,10 +1,23 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Connexion</router-link> |
-    <router-link to="/inscription">Inscription</router-link>
-  </div>
+  <Navbar v-show="isLoggedin"></Navbar>
+  <Home></Home>
   <router-view/>
 </template>
+
+<script>
+import Navbar from "./components/Navbar"
+import { mapState } from 'vuex'
+export default {
+    name: "App",
+    computed: mapState({
+      isLoggedin: 'isLoggedin'
+    }),
+    components: { 
+        Navbar,
+    }
+}
+
+</script>
 
 <style lang="scss">
 #app {

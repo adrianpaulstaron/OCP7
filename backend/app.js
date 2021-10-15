@@ -2,13 +2,14 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require ('path');
-
-// const { Sequelize, Model, DataTypes } = require('sequelize');
-// sequelize = await new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_HOST_PORT,
-//   dialect: 'mysql'
-// });  
+const cors = require('cors');
+/* CROSS ORIGIN RESOURCE SHARING CORS */
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
 
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
@@ -21,7 +22,6 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
 const usersRoutes = require('./routes/users')
 const postsRoutes = require('./routes/posts')
 const commentsRoutes = require('./routes/comments')
-
 
 async function CoTest() {
   try {

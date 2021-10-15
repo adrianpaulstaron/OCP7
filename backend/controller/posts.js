@@ -1,22 +1,31 @@
-const Post = require('../models/post')
+const fs = require('fs');
+const db = require('../models');
+
 
 exports.createPost = async (req, res, next) => {
+    var imageUrl = null
+    if(req.file){
+        imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
     const newPost = req.body
-    await Post.create({
-    title: newPost.title,
-    text: newPost.text,
-    user_id: newPost.user_id
-    }, { fields: ['title', 'text', 'user_id'] })
+    db.posts.create({
+        title: newPost.title,
+        text: newPost.text,
+        user_id: newPost.user_id,
+        image_url: imageUrl
+    }, { fields: ['title', 'text', 'user_id', 'image_url'] })
     .then(() => res.status(201).json({ message: 'Post créé'}))
     .catch(error => res.status(400).json({error})); 
 }
 
-exports.getPosts = async (req, res, next) => {
-    await Post.findAll()
-    .then(posts => {
-        console.log("posts: ", posts)
+exports.getPosts = (req, res, next) => {
+    db.posts.findAll({ limit: 10 }).then(function(rows) {
+        let postsArray = new Array()
+        rows.forEach(post => {
+            postsArray.push(post.dataValues)
+        })
     })
-    .then(() => res.status(201).json({ message: 'Posts trouvés' }))
+    .then(() => res.status(200).json({ message: 'Posts trouvés' }))
     .catch(error => res.status(400).json({error}));
 }
 

@@ -1,20 +1,21 @@
 <template>
-  <div class="home">
-    <h1>Connexion</h1>
-    <Accueil/>
-  </div>
+    <div id="nav">
+    <router-link to="/">Connexion</router-link> |
+    <router-link to="/inscription">Inscription</router-link>
+    </div>
+    <Connection></Connection>
+    
 </template>
 
 <script>
 // @ is an alias to /src
-import Accueil from '@/components/Accueil.vue'
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Connection from '@/views/Connection.vue'
 
 export default {
   name: 'Home',
   components: {
     // HelloWorld,
-    Accueil
+    Connection
   }
 }
 </script>
