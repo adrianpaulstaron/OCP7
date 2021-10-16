@@ -10,7 +10,10 @@ import { mapState } from 'vuex'
 export default {
     name: "App",
     computed: mapState({
-      isLoggedin: 'isLoggedin'
+      isLoggedin: 'isLoggedin',
+      firstname: 'firstname',
+      surname: 'surname',
+      email: 'email'
     }),
     components: { 
         Navbar,

@@ -33,8 +33,10 @@
 
 <script>
   import axios from "axios"
+  import router from "../router";
   import Swal from "sweetalert2";
-
+  import store from "../store"
+  
   export default{
     name: "inscription",
     data() {
@@ -76,7 +78,19 @@
             showConfirmButton: false,
             timerProgressBar: true,
           });
-        });
+        })
+        .then(()=> {
+          axios.post("http://localhost:3001/api/users/login", { 
+            email: this.email, 
+            password: this.password
+        })
+          .then((response) => {
+            const user = response.data
+            console.log(user)
+            store.commit('login', user)
+            router.push("/timeline");
+          })
+        })
       }
     }
   }

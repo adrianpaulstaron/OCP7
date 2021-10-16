@@ -1,5 +1,60 @@
 <template>
-<h1>Fil d'Actualité</h1>
-<div>bonjour</div>
+
+<h1 class="mt-5 mb-5" >Fil d'Actualités</h1>
+<button v-on:click="handlePosting" type="button" class="py-3 px-5 btn btn-success mb-5 mt-5">Poster</button>
+
+<div class="d-flex flex-column align-items-center">
+    <div class="card w-75 my-2" style="width: 18rem;" v-for="(post) in posts" :key="post.id">
+        <div class="mr-2 mt-1 mb-3 text-right">Posté par {{post.user.firstname}} {{post.user.surname}}, le  {{post.created_at}}</div>
+        <img class="card-img-top" :src="post.image_url" >
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.text }}</p>
+            <router-link class="btn btn-primary" :to="{ name: 'PostDetails', params: { id: post.id } }">Consulter</router-link>
+        </div>
+    </div>
+</div>
+
 </template>
 
+<script>
+import axios from "axios";
+import router from "../router";
+import { mapState } from 'vuex'
+
+
+export default {
+    name: 'Timeline',
+    components: {
+    },
+    computed: mapState({
+        isLoggedin: 'isLoggedin',
+        firstname: 'firstname',
+        surname: 'surname',
+        email: 'email'
+    }),
+    data() {
+      return {
+        posts:[]
+      }
+    },
+    methods: {
+        handlePosting: () => {
+            router.push("/NewPost");
+        },
+        getPosts: function () {
+            axios.get("http://localhost:3001/api/posts/")
+            .then((response) => {
+                this.posts = response.data
+                console.log(response.data)
+                this.info = response
+                router.push("/timeline");
+            })
+        }
+    },
+    // on appelle notre méthode getPosts avant le mount
+    beforeMount(){
+        this.getPosts()
+    }
+}
+</script>

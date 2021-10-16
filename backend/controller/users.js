@@ -41,7 +41,7 @@ exports.login = async (req, res, next) => {
             firstname: user.firstname,
             surname: user.surname,
             email: user.email,
-            isAdmin: user.isAdmin,
+            isAdmin: user.is_admin,
             token: jwt.sign(
               // le token contient l'user id, la clef (chaîne de caractères), et la durée avant expiration du token
               { userId: user.id },
@@ -81,7 +81,7 @@ exports.getOneUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   const userId = req.params.id
   console.log("id = " + userId)
-  await User.destroy({
+  await db.users.destroy({
     where: {
       id: userId
     }

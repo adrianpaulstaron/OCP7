@@ -19,41 +19,86 @@ exports.createPost = async (req, res, next) => {
 }
 
 exports.getPosts = (req, res, next) => {
-    db.posts.findAll({ limit: 10 }).then(function(rows) {
-        let postsArray = new Array()
+    let postsArray = new Array()
+    db.posts.findAll({ 
+        include: {
+            model: db.users,
+            required: true,
+            attributes: ["firstname", "surname", "id"]
+        },
+        limit: 100,
+        // on organise les posts par ordre d'id décroissant, afin de les avoir du plus récent au plus vieux
+        order: [
+            ['id', 'DESC']
+        ],
+        
+    })
+    .then(function(rows) {
         rows.forEach(post => {
             postsArray.push(post.dataValues)
         })
+        res.status(200).json(postsArray)
     })
-    .then(() => res.status(200).json({ message: 'Posts trouvés' }))
     .catch(error => res.status(400).json({error}));
 }
 
 exports.getOnePost = async (req, res, next) => {
+    // on récupère les paramètres
     const postId = req.params.id
-    console.log("post id : " + postId)
-    await Post.findOne({
+    // on fait un findOne du post
+    await db.posts.findOne({
         where: {
         id: postId
         }
     })
+    // lorsque l'on a trouvé le post, on cherche les infos de l'utilisateur qui l'a créé
     .then(post => {
         if(post){
-        console.log("post: ", post)
+            post = post.dataValues
+            // on fait un findOne sur les users where l'id correspond à la clef étrangère user_id qu'on a dans le post
+            db.users.findOne({ where: {id: post.user_id} })
+            .then(user => {
+                // on crée un objet littéral
+                let postInfos = {}
+                // on met sous forme de clef-valeur l'utilisateur et le post dedans
+                postInfos.user=user
+                postInfos.post=post
+                res.status(200).json(postInfos)
+            })
         }
     })
-    .then(() => res.status(201).json({ message: 'Post trouvé'}))
     .catch(error => res.status(400).json({error})); 
 }
 
 exports.deletePost = async (req, res, next) => {
     const postId = req.params.id
-    console.log("id = " + postId)
-    await Post.destroy({
-      where: {
-        id: postId
-      }
+    db.posts.findOne({ where: {id: postId}})
+    .then(result => {
+        post = result.dataValues
+        if(post.image_url){
+            // pour supprimer un post, on veut aussi supprimer son image, on prend donc l'url de l'image stocké en base que l'on split sur le dossier /images/. On obtient donc un tableau dont l'index 0 est le chemin moins /images/, et l'index 1 est le nom de l'image
+            const filename = post.image_url.split('/images/')[1];
+            // on supprime donc l'image dont on a obtenu le nom de fichier ainsi
+            fs.unlink(`images/${filename}`, () => {
+                db.posts.destroy({
+                where: {
+                  id: postId
+                }
+              })
+              .then(() => res.status(200).json({ message: 'Post effacé' }))
+              .catch(error => res.status(400).json({error})); 
+            })
+        }else{
+            db.posts.destroy({
+                where: {
+                  id: postId
+                }
+              })
+              .then(() => res.status(200).json({ message: 'Post effacé' }))
+              .catch(error => res.status(400).json({error})); 
+        }
+        
+        
     })
-    .then(() => res.status(201).json({ message: 'Post effacé' }))
-    .catch(error => res.status(400).json({error})); 
+    
 }
