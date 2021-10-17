@@ -4,13 +4,13 @@
     <form @submit.prevent="handleLogin" class="w-75">
       <div class="form-group">
         <label for="exampleInputEmail1">Adresse e-mail</label>
-        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="votre e-mail">
+        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="votre e-mail">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Mot de passe</label>
         <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="votre mot de passe">
       </div>
-      <button type="submit" class="btn btn-primary">Se Connecter</button>
+      <button type="submit" class="btn btn-dark">Se Connecter</button>
     </form>
   </div>
 </template>

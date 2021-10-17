@@ -1,39 +1,36 @@
 <template>
-    <div id="nav">
-    <router-link class="routerlink" to="/">Connexion</router-link> |
-    <router-link class="routerlink" to="/inscription">Inscription</router-link>
-    </div>
+    <HomeNav></HomeNav>
     <Connection></Connection>
     
 </template>
 
 <script>
 import Connection from '@/views/Connection.vue'
+import HomeNav from '@/components/HomeNav.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld,
+    HomeNav,
     Connection
   }
 }
 </script>
 
 <style>
-  a {
+  /* a {
   color: red;
 }
 a:hover {
    color: #00F
-}
+} */
 
-.router-link{
+/* .router-link{
   color: rgb(240, 20, 20)
-}
+} */
 
 .routerlink{
-  color: rgb(240, 20, 20);
-  background-color: blue;
+  color: black!important;
   }
   
 </style>

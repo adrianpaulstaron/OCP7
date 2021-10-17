@@ -7,6 +7,7 @@
 <script>
 import Navbar from "./components/Navbar"
 import { mapState } from 'vuex'
+
 export default {
     name: "App",
     computed: mapState({
@@ -17,7 +18,16 @@ export default {
     }),
     components: { 
         Navbar,
+    },
+    methods: {
+      handler() {
+        document.documentElement.setAttribute('lang', "fr");
+      },
+    },
+    beforeMount(){
+        this.handler()
     }
+
 }
 
 </script>

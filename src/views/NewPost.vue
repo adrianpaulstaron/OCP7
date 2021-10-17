@@ -18,15 +18,15 @@
         </div>
         <!-- on vérifie si on a une image -->
         <div v-if="!image">
-            <h2>Selectionner une image (png, jpg, jpeg ou gif)</h2>
+            <label for="imageUpload">Selectionner une image (png, jpg, jpeg ou gif)</label>
             <!-- on n'autorise que certains fichiers, et on précise qu'on appelle la fonction onFileChange lorsque l'on change le fichier  -->
-            <input class="btn btn-info my-2" accept="image/png, image/jpeg, image/gif, image/jpg" type="file" @change="onFileChange">
+            <input id="imageUpload" class="btn btn-info my-2" accept="image/png, image/jpeg, image/gif, image/jpg" type="file" @change="onFileChange">
         </div>
         <div v-else>
-            <img class="preview" :src="image" />
+            <img alt="aperçu de l'image" class="preview" :src="image" />
             <button class="btn btn-danger my-2" @click="removeImage">Supprimer l'image</button>
         </div>
-        <button type="submit" class="btn btn-success my-2">Poster</button>
+        <button type="submit" class="btn btn-dark my-2">Poster</button>
     </form>
 </div>
 </template>

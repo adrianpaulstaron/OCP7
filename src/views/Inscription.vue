@@ -1,8 +1,5 @@
 <template>
-    <div id="nav">
-    <router-link to="/">Connexion</router-link> |
-    <router-link to="/inscription">Inscription</router-link>
-    </div>
+<HomeNav></HomeNav>
 
   <div class="signup">
     <h1>Inscription</h1>
@@ -18,14 +15,14 @@
         </div>
         <div class="form-group">
           <label for="inputEmail">Adresse e-mail</label>
-          <input required v-model="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="votre adresse e-mail">
+          <input required v-model="email" type="email" class="form-control" id="inputEmail" placeholder="votre adresse e-mail">
         </div>
         <div class="form-group">
           <label for="inputPassword">Mot de passe</label>
           <input v-model="password" type="password" class="form-control" id="inputPassword" aria-describedby="pwdHelp" placeholder="votre mot de passe">
           <small id="pwdHelp" class="form-text text-muted">Votre mot de passe doit contenir au moins une lettre et un chiffre, et faire au moins 8 caractères.</small>
         </div>
-        <button required type="submit" class="btn btn-primary">S'Inscrire</button>
+        <button required type="submit" class="btn btn-dark">S'Inscrire</button>
       </form>
     </div>
   </div>
@@ -36,9 +33,13 @@
   import router from "../router";
   import Swal from "sweetalert2";
   import store from "../store"
+  import HomeNav from '@/components/HomeNav.vue'
   
   export default{
     name: "inscription",
+    components: {
+            HomeNav
+    },
     data() {
       return {
         firstname:"",
@@ -95,3 +96,4 @@
     }
   }
 </script>
+

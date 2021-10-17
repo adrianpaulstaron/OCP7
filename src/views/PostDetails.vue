@@ -2,9 +2,9 @@
     <div class="d-flex flex-column align-items-center">
         <div class="card w-75 my-2 postcard mb-5 mt-5" style="width: 18rem;">
             <div class="mr-2 mt-1 text-right">Posté par {{user.firstname}} {{user.surname}}, le  {{post.created_at}}</div>
-            <img class="card-img-top" :src="post.image_url" >
+            <img alt="image de la publication" v-if="post.image_url" class="card-img-top" :src="post.image_url" >
             <div class="card-body p-2">
-                <h5 class="card-title">{{ post.title }}</h5>
+                <h1 class="card-title">{{ post.title }}</h1>
                 <p class="card-text text-left">{{ post.text }}</p>
                     <button v-if="isAdmin || (userId == user.id)" v-on:click="handleDeletePost" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
             </div>
@@ -13,9 +13,10 @@
 
     <form @submit.prevent="handlePosting" class="d-flex flex-column align-items-center">
         <div class="form-group w-75">
-            <textarea required v-model="newComment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label class="d-none" for="textOfComment">Texte de votre commentaire</label>
+            <textarea id="textOfComment" placeholder="Tapez votre commentaire ici" required v-model="newComment" class="form-control" rows="3"></textarea>
         </div>
-        <button type="submit" class="py-3 px-5 mb-5 w-15 btn btn-success my-2">Commenter</button>
+        <button type="submit" class="py-3 px-5 mb-5 w-15 btn btn-dark my-2">Commenter</button>
     </form>
 
     <div class="d-flex flex-column align-items-center" v-for="(comment) in comments" :key="comment.id">
