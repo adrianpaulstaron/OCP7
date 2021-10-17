@@ -4,11 +4,11 @@
     <form @submit.prevent="handlePosting" class="w-75">
         <div class="form-group">
             <label for="exampleFormControlInput1">Titre</label>
-            <input v-model="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre">
+            <input required v-model="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre">
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Texte</label>
-            <textarea v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea required v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <div class="input-group mb-3">
         <!-- <div class="custom-file">

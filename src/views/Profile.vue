@@ -2,7 +2,7 @@
   <div class="profile">
   <h1 class="mt-5">Profil</h1>
   <div class="d-flex justify-content-center">
-    <div class="card" style="width: 18rem;">
+    <div class="card mt-3" style="width: 18rem;">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">{{firstname}}</li>
         <li class="list-group-item">{{surname}}</li>
@@ -45,7 +45,8 @@ export default {
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Oui'
+          confirmButtonText: 'Oui',
+          cancelButtonText: "Non"
         }).then((result) => {
           if (result.isConfirmed) {
             axios.delete("http://localhost:3001/api/users/" + this.userId)

@@ -10,22 +10,22 @@
       <form @submit.prevent="handleSignup" class="w-75">
         <div class="form-group">
           <label for="inputFirstname">Prénom</label>
-          <input v-model="firstname" class="form-control" id="inputFirstname" type="text" placeholder="votre prénom">
+          <input required v-model="firstname" class="form-control" id="inputFirstname" type="text" placeholder="votre prénom">
         </div>
         <div class="form-group">
           <label for="inputSurname">Nom</label>
-          <input v-model="surname" class="form-control" id="inputSurname" type="text" placeholder="votre nom">
+          <input required v-model="surname" class="form-control" id="inputSurname" type="text" placeholder="votre nom">
         </div>
         <div class="form-group">
           <label for="inputEmail">Adresse e-mail</label>
-          <input v-model="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="votre adresse e-mail">
+          <input required v-model="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="votre adresse e-mail">
         </div>
         <div class="form-group">
           <label for="inputPassword">Mot de passe</label>
           <input v-model="password" type="password" class="form-control" id="inputPassword" aria-describedby="pwdHelp" placeholder="votre mot de passe">
           <small id="pwdHelp" class="form-text text-muted">Votre mot de passe doit contenir au moins une lettre et un chiffre, et faire au moins 8 caractères.</small>
         </div>
-        <button type="submit" class="btn btn-primary">S'Inscrire</button>
+        <button required type="submit" class="btn btn-primary">S'Inscrire</button>
       </form>
     </div>
   </div>

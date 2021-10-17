@@ -86,6 +86,6 @@ exports.deleteUser = async (req, res, next) => {
       id: userId
     }
   })
-  .then(() => res.status(201).json({ message: 'Utilisateur effacé'}))
+  .then(() => res.status(200).json({ message: 'Utilisateur effacé'}))
   .catch(error => res.status(400).json({error})); 
 }

@@ -1,27 +1,26 @@
 <template>
     <div class="d-flex flex-column align-items-center">
-        <div class="mb-5 card w-75 my-2" style="width: 18rem;">
-            <img class="card-img-top">
-            <div class="card-body">
-                <div class="mb-3 text-right">Posté par {{user.firstname}} {{user.surname}}, le  {{post.created_at}}</div>
-                <h5 class="mb-3 card-title">{{ post.title }}</h5>
-                <img class="mb-2 card-img-top" :src="post.image_url" >
+        <div class="card w-75 my-2 postcard mb-5 mt-5" style="width: 18rem;">
+            <div class="mr-2 mt-1 text-right">Posté par {{user.firstname}} {{user.surname}}, le  {{post.created_at}}</div>
+            <img class="card-img-top" :src="post.image_url" >
+            <div class="card-body p-2">
+                <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text text-left">{{ post.text }}</p>
+                    <button v-if="isAdmin || (userId == user.id)" v-on:click="handleDeletePost" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
             </div>
-                <button v-if="isAdmin || (userId == user.id)" v-on:click="handleDeletePost" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
         </div>
     </div>
 
     <form @submit.prevent="handlePosting" class="d-flex flex-column align-items-center">
         <div class="form-group w-75">
-            <textarea v-model="newComment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea required v-model="newComment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <button type="submit" class="w-15 btn btn-success my-2">Commenter</button>
+        <button type="submit" class="py-3 px-5 mb-5 w-15 btn btn-success my-2">Commenter</button>
     </form>
 
     <div class="d-flex flex-column align-items-center" v-for="(comment) in comments" :key="comment.id">
         <div class="comment card w-75 my-2" style="width: 18rem;">
-            <div class="card-body">
+            <div class="card-body p-2">
                 <div class="mb-3 text-right">Posté par {{comment.user.firstname}} {{comment.user.surname}}, le  {{comment.created_at}}</div>
                 <p class="card-text text-left">{{comment.text}}</p>
                 <button v-if="isAdmin || (userId == comment.user.id)" v-on:click="handleDeleteComment(comment.id)" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
@@ -97,7 +96,8 @@ export default {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui'
+            confirmButtonText: 'Oui',
+            cancelButtonText: "Non"
             }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete("http://localhost:3001/api/posts/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
@@ -120,7 +120,8 @@ export default {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui'
+            confirmButtonText: 'Oui',
+            cancelButtonText: "Non"
             }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete("http://localhost:3001/api/comments/" + commentId)
@@ -142,10 +143,14 @@ export default {
         this.getComments()
     }
 }
+
 </script>
 
 <style>
     .comment{
-        background-color: beige!important;
+        background-color: #f5e4d9!important;
+    }
+    .postcard{
+        background-color: #fff9f4!important;
     }
 </style>

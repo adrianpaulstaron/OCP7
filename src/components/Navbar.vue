@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white navbar-fixed-top">
         <router-link to="/Timeline" class="nav-link">    
             <img src="../assets/icon-left-font-monochrome-black.svg" width="150" height="30" alt="">
         </router-link>                

@@ -9,7 +9,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     text: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     },
     created_at: {
       type: DataTypes.DATE,

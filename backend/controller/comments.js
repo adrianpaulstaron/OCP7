@@ -48,6 +48,6 @@ exports.deleteComment = async (req, res, next) => {
         id: commentId
       }
     })
-    .then(() => res.status(201).json({ message: 'Commentaire effacé' }))
+    .then(() => res.status(200).json({ message: 'Commentaire effacé' }))
     .catch(error => res.status(400).json({error})); 
 }
