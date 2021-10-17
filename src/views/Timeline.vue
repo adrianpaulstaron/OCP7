@@ -31,7 +31,8 @@ export default {
         isLoggedin: 'isLoggedin',
         firstname: 'firstname',
         surname: 'surname',
-        email: 'email'
+        email: 'email',
+        token: 'token'
     }),
     data() {
       return {
@@ -43,7 +44,7 @@ export default {
             router.push("/NewPost");
         },
         getPosts: function () {
-            axios.get("http://localhost:3001/api/posts/")
+            axios.get("http://localhost:3001/api/posts/", {headers: {Authorization: "Bearer " + this.token}})
             .then((response) => {
                 this.posts = response.data
                 console.log(response.data)

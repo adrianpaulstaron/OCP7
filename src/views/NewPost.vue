@@ -48,7 +48,8 @@ export default {
     },
     computed: mapState({
         user_id: 'userId',
-        firstname: 'firstname'
+        firstname: 'firstname',
+        token: 'token'
     }),
     methods: {
         handlePosting: function () {
@@ -60,7 +61,7 @@ export default {
             data.append('text', this.text)
             data.append('image', this.file)
             // on fait notre requête avec le formdata en deuxième argument
-            axios.post("http://localhost:3001/api/posts/", data)
+            axios.post("http://localhost:3001/api/posts/", data, {headers: {Authorization: "Bearer " + this.token}})
             .then(() => {
                 router.push("/TimeLine");
             })

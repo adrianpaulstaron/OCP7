@@ -18,6 +18,6 @@ module.exports = (req, res, next) => {
         }
     } catch (error) {
         // si la requête n'est pas authentifié, on envoie une erreur adaptée
-        res.status(401).json({ error: error | 'Requête non authentifiée !'})
+        res.status(401).json({ error: error | 'Requête non authentifiée'})
     }
 };

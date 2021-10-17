@@ -44,7 +44,8 @@ export default {
     computed: mapState({
         userId: 'userId',
         firstname: 'firstname',
-        isAdmin: 'isAdmin'
+        isAdmin: 'isAdmin',
+        token: 'token'
     }),
     data() {
         return {
@@ -56,7 +57,7 @@ export default {
     },
     methods: {
         getPost: function () {
-            axios.get("http://localhost:3001/api/posts/" + this.$route.params.id)
+            axios.get("http://localhost:3001/api/posts/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
             .then((response) => {
                 this.post = response.data.post
                 this.user = response.data.user
@@ -64,7 +65,7 @@ export default {
             })
         },
         getComments: function () {
-            axios.get("http://localhost:3001/api/comments/" + this.$route.params.id)
+            axios.get("http://localhost:3001/api/comments/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
             .then((response) => {
                 this.comments = response.data
                 this.comments.forEach(comment => {
@@ -77,7 +78,8 @@ export default {
                 text : this.newComment,
                 post_id: this.$route.params.id,
                 user_id: this.userId
-            })
+            },
+            {headers: {Authorization: "Bearer " + this.token}})
             .then(() => {
                 this.getComments(),
                 this.resetInput()
@@ -98,7 +100,7 @@ export default {
             confirmButtonText: 'Oui'
             }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete("http://localhost:3001/api/posts/" + this.$route.params.id)
+                axios.delete("http://localhost:3001/api/posts/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
                 .then(()=> {
                 Swal.fire(
                 'Publication effacée.',
