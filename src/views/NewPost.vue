@@ -24,7 +24,7 @@
         </div>
         <div v-else>
             <img alt="aperçu de l'image" class="preview" :src="image" />
-            <button class="btn btn-danger my-2" @click="removeImage">Supprimer l'image</button>
+            <button class="btn btn-danger mt-5" @click="removeImage">Supprimer l'image</button>
         </div>
         <button type="submit" class="btn btn-dark my-2">Poster</button>
     </form>
@@ -103,5 +103,8 @@ export default {
     margin: auto;
     display: block;
     margin-bottom: 10px;
+    }
+    label {
+        display:block!important;
     }
 </style>

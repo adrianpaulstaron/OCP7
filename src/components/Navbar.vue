@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" v-bind:class="{ 'show': show }">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                  <router-link to="/profile" class="nav-link">{{firstname}}</router-link>                
+                  <router-link to="/profile" class="nav-link">{{firstname}} (profil)</router-link>                
               </li>
               <li class="nav nav-item">
                   <a v-on:click="handleLogout" class="nav-link mx-auto" href="#">Déconnexion</a>
