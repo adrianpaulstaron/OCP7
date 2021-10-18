@@ -50,15 +50,10 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             axios.delete("http://localhost:3001/api/users/" + this.userId)
-            .then(()=> {
-              Swal.fire(
-              'Utilisateur effacé.',
-              )
               .then(()=>{
                 store.commit('logout')
                 router.push("/");
               })
-            }) 
           }
         })
       }
