@@ -66,10 +66,9 @@ export default {
             Swal.fire({
             title: 'Suppression de la publication',
             text: "Êtes-vous certain de vouloir supprimer la publication ?",
-            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#b80000',
+            cancelButtonColor: '#424242',
             confirmButtonText: 'Oui',
             cancelButtonText: "Non"
             }).then((result) => {

@@ -44,10 +44,9 @@ export default {
       Swal.fire({
         title: 'Suppression du compte',
         text: "Êtes-vous certain de vouloir supprimer votre compte ?",
-        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#b80000',
+        cancelButtonColor: '#424242',
         confirmButtonText: 'Oui',
         cancelButtonText: "Non"
       }).then((result) => {
