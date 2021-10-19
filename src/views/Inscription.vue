@@ -58,31 +58,7 @@
           email: this.email, 
           password: this.password
         })
-          .catch(function (error) {
-            const codeError = error.message.split("code ")[1];
-            let messageError = "";
-            switch (codeError) {
-              case "401":
-                messageError = "Mot de passe erroné !";
-                break;
-              case "403":
-                messageError =
-                  "Le compte associé à cette adresse email a été supprimé !";
-                break;
-              case "404":
-                messageError = "Utilisateur non-trouvé !";
-                break;
-            }
-            Swal.fire({
-              title: "Une erreur est survenue",
-              text: messageError || error.message,
-              icon: "error",
-              timer: 4000,
-              showConfirmButton: false,
-              timerProgressBar: true,
-            });
-          })
-          .then(()=> {
+        .then(()=> {
             axios.post("http://localhost:3001/api/users/login", { 
               email: this.email, 
               password: this.password
@@ -93,6 +69,13 @@
               store.commit('storeUser', user)
               router.push("/timeline");
             })
+          })
+          .catch(function () {
+            Swal.fire({
+              title: "Cet email est déjà utilisé",
+              confirmButtonColor: '#b80000',
+              confirmButtonText: 'OK',
+            });
           })
         }else{
           Swal.fire({
