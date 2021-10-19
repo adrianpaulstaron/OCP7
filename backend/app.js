@@ -3,13 +3,18 @@ const express = require('express')
 const app = express()
 const path = require ('path');
 const cors = require('cors');
+const helmet = require("helmet");
+
+
 /* CROSS ORIGIN RESOURCE SHARING CORS */
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+
+app.use(helmet());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -34,18 +39,6 @@ async function CoTest() {
 }
 CoTest()
 
-// const userRoutes = require('./routes/user')
-const helmet = require("helmet");
-
-app.use(helmet());
-
-// le front et le back tournent sur la même machine, on avait donc une erreur car il s'agit d'une violation des règles de sécurité de cors
-// on autorise donc l'url sur laquelle on fait tourner le front, pour le développement
-// const cors = require('cors');
-// app.use(cors({
-//     origin: 'http://localhost:8081'
-// }));
-
 var RateLimit = require('express-rate-limit');
 app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
 var limiter = new RateLimit({
@@ -58,13 +51,6 @@ app.use(limiter);
 
 // Middleware
 app.use(express.json())
-
-// const mongoose = require('mongoose');
-// main().catch(err => console.log(err));
-// // on connecte mongoose à la bonne bdd
-// async function main() {
-//   await mongoose.connect(process.env.DB_CONNECT_URI);
-// }
 
 app.use('/api/users', usersRoutes)
 app.use('/api/posts', postsRoutes)

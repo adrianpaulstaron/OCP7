@@ -34,10 +34,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Inscription.vue')
   },
   {
-    path: '/profile',
+    path: '/profile/:id?',
     name: 'Profile',
     beforeEnter : routeGuard,
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
+    component: () => import('../views/Profile.vue')
   },
   {
     path: '/timeline',

@@ -1,17 +1,17 @@
 import { createStore } from "vuex" 
 
 const store = createStore({
-   state: {
-      isLoggedin: false,
-      firstname: null,
-      surname: null,
-      email: null,
-      token: null,
-      userId: null,
-      isAdmin: false
-   },
-   mutations: {
-    login (state, user) {
+  state: {
+    isLoggedin: false,
+    firstname: null,
+    surname: null,
+    email: null,
+    token: null,
+    userId: null,
+    isAdmin: false
+  },
+  mutations: {
+    storeUser (state, user) {
       // muter l'état
       state.isLoggedin = true
       state.firstname = user.firstname

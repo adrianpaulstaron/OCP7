@@ -64,17 +64,18 @@ exports.login = async (req, res, next) => {
 exports.getOneUser = async (req, res, next) => {
   const userId = req.params.id
   console.log("id = " + userId)
-  await User.findOne({
+  await db.users.findOne({
     where: {
       id: userId
     }
   })
-  .then(user => {
-    if(user){
-      console.log("user: ", user)
+  .then(result => {
+    if(result){
+      // console.log("user: ", user)
+      user = result.dataValues
+      res.status(200).json({ user })
     }
   })
-  .then(() => res.status(201).json({ message: 'Utilisateur trouvé'}))
   .catch(error => res.status(400).json({error})); 
 }
 

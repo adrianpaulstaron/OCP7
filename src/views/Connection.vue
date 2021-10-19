@@ -40,9 +40,13 @@ import { mapState } from 'vuex'
           password: this.password
         })
         .then((response) => {
+          // on stringify notre réponse pour obtenir un user stockable dans le localStorage
+          let stringifiedUser = JSON.stringify(response.data)
+          // console.log("stringifiedUser", stringifiedUser)
+          // on set l'item User du localstorage sur cette valeur
+          localStorage.setItem('User', stringifiedUser)
           const user = response.data
-          console.log(user)
-          store.commit('login', user)
+          store.commit('storeUser', user)
           router.push("/timeline");
         })
         .catch(function (error) {

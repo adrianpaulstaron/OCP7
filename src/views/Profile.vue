@@ -4,10 +4,10 @@
   <div class="d-flex justify-content-center">
     <div class="card mt-3" style="width: 18rem;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{firstname}}</li>
-        <li class="list-group-item">{{surname}}</li>
-        <li class="list-group-item">{{email}}</li>
-        <button v-on:click="handleDelete" type="button" class="btn btn-danger">Effacer le compte</button>
+        <li class="list-group-item">{{user.firstname}}</li>
+        <li class="list-group-item">{{user.surname}}</li>
+        <li class="list-group-item">{{user.email}}</li>
+        <button v-if="userId == user.id" v-on:click="handleDelete" type="button" class="btn btn-danger">Effacer le compte</button>
       </ul>
     </div>
       <div>
@@ -32,31 +32,51 @@ export default {
   name: 'Home',
   computed: mapState({
       userId: 'userId',
-      firstname: 'firstname',
-      surname: 'surname',
-      email: 'email'
-    }),
-    methods: {
-      handleDelete: function () {
-        Swal.fire({
-          title: 'Suppression du compte',
-          text: "Êtes-vous certain de vouloir supprimer votre compte ?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Oui',
-          cancelButtonText: "Non"
-        }).then((result) => {
-          if (result.isConfirmed) {
-            axios.delete("http://localhost:3001/api/users/" + this.userId)
-              .then(()=>{
-                store.commit('logout')
-                router.push("/");
-              })
-          }
-        })
-      }
+      token: 'token'
+      }),
+  data(){
+    return {
+      user:""
     }
+  },
+  methods: {
+    handleDelete: function () {
+      Swal.fire({
+        title: 'Suppression du compte',
+        text: "Êtes-vous certain de vouloir supprimer votre compte ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui',
+        cancelButtonText: "Non"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete("http://localhost:3001/api/users/" + this.userId)
+            .then(()=>{
+              store.commit('logout')
+              router.push("/");
+            })
+        }
+      })
+    },
+    // on crée une méthode getUser qui va chercher un user
+    getUser: function () {
+        // elle requête la route get users, avec en paramères l'id de l'user qu'on a récupéré en url, et on met en header le token qu'on a récupéré du store
+        axios.get("http://localhost:3001/api/users/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
+        .then((response) => {
+            console.log("response data => ", response.data)
+            this.user = response.data.user
+        })
+    },
+  },
+  beforeMount(){
+    this.getUser()
+  },
+  watch:{
+    $route (){
+      this.getUser()
+  }
+} 
 }
 </script>

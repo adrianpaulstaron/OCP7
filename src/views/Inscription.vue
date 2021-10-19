@@ -88,7 +88,7 @@
           .then((response) => {
             const user = response.data
             console.log(user)
-            store.commit('login', user)
+            store.commit('storeUser', user)
             router.push("/timeline");
           })
         })

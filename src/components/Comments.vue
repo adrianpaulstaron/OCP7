@@ -10,7 +10,7 @@
     <div class="d-flex flex-column align-items-center" v-for="(comment) in comments" :key="comment.id">
         <div class="comment card w-75 my-2" style="width: 18rem;">
             <div class="card-body p-2">
-                <div class="mb-3 text-right">Posté par {{comment.user.firstname}} {{comment.user.surname}}, le  {{comment.created_at}}</div>
+                <div class="mb-3 text-right">Posté par {{comment.user.firstname}} {{comment.user.surname}}, le {{comment.created_at}} à {{comment.hour}}h{{comment.minute}}</div>
                 <p class="card-text text-left">{{comment.text}}</p>
                 <button v-if="isAdmin || (userId == comment.user.id)" v-on:click="handleDeleteComment(comment.id)" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
             </div>
@@ -25,6 +25,7 @@ import { mapState } from 'vuex'
 import Swal from "sweetalert2";
 
 export default {
+    // on exporte notre composant avec le nom "Comments"
     name: 'Comments',
     components: {
     },
@@ -46,10 +47,14 @@ export default {
         getComments: function () {
             axios.get("http://localhost:3001/api/comments/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
             .then((response) => {
-                this.comments = response.data
-                this.comments.forEach(comment => {
-                comment.created_at = new Date(comment.created_at).toLocaleDateString()
-                })
+                    this.comments = response.data
+                    console.log(response.data)
+                    this.comments.forEach(comment => {
+                        var commentDate = new Date(comment.created_at)
+                        comment.hour = commentDate.getHours()
+                        comment.minute = (commentDate.getMinutes()<10?'0':'') + commentDate.getMinutes()
+                        comment.created_at = commentDate.toLocaleDateString() 
+                    })
             })
         },
         handlePosting: function () {
