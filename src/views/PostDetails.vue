@@ -2,7 +2,7 @@
     <!-- on crée une card pour le post -->
     <div class="d-flex flex-column align-items-center">
         <div class="card w-75 my-2 postcard mb-5 mt-5" style="width: 18rem;">
-            <div class="mr-2 mt-1 text-right">Posté par {{user.firstname}} {{user.surname}}, le {{post.created_at}} à {{post.hour}}h{{post.minute}}</div>
+            <div class="mr-2 mt-1 text-right">Posté par <router-link class="username" :to="{ name: 'Profile', params: { id: user.id }}">{{user.firstname}} {{user.surname}}</router-link>, le {{post.created_at}} à {{post.hour}}h{{post.minute}}</div>
             <img alt="image de la publication" v-if="post.image_url" class="card-img-top" :src="post.image_url" >
             <div class="card-body p-2">
                 <h1 class="card-title">{{ post.title }}</h1>
@@ -21,7 +21,6 @@ import { mapState } from 'vuex'
 import router from "../router";
 import Swal from "sweetalert2";
 import Comments from '@/components/Comments.vue'
- 
 
 export default {
     name: 'PostDetails',
@@ -99,5 +98,8 @@ export default {
     }
     .postcard{
         background-color: #fff9f4!important;
+    }
+    .username{
+        color: #eb0000!important
     }
 </style>

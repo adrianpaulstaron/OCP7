@@ -10,7 +10,7 @@
     <div class="d-flex flex-column align-items-center" v-for="(comment) in comments" :key="comment.id">
         <div class="comment card w-75 my-2" style="width: 18rem;">
             <div class="card-body p-2">
-                <div class="mb-3 text-right">Posté par {{comment.user.firstname}} {{comment.user.surname}}, le {{comment.created_at}} à {{comment.hour}}h{{comment.minute}}</div>
+                <div class="mb-3 text-right">Posté par <router-link class="username" :to="{ name: 'Profile', params: { id: comment.user.id }}">{{comment.user.firstname}} {{comment.user.surname}}</router-link>, le {{comment.created_at}} à {{comment.hour}}h{{comment.minute}}</div>
                 <p class="card-text text-left">{{comment.text}}</p>
                 <button v-if="isAdmin || (userId == comment.user.id)" v-on:click="handleDeleteComment(comment.id)" class="mx-auto w-15 btn btn-danger my-2">supprimer</button>
             </div>

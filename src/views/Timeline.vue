@@ -6,7 +6,7 @@
 <div class="d-flex flex-column align-items-center">
     <div class="card w-75 my-2 postcard" style="width: 18rem;" v-for="(post) in posts" :key="post.id">
         <div class="mr-2 mt-1 text-right">Posté par 
-            <router-link :to="{ name: 'Profile', params: { id: post.user.id }}">{{post.user.firstname}} {{post.user.surname}}</router-link>, le  {{new Date(post.created_at).toLocaleDateString()}} à {{ getExactTime(post.created_at) }}
+            <router-link class="username" :to="{ name: 'Profile', params: { id: post.user.id }}">{{post.user.firstname}} {{post.user.surname}}</router-link>, le  {{new Date(post.created_at).toLocaleDateString()}} à {{ getExactTime(post.created_at) }}
         </div>
         <img v-if="post.image_url" class="card-img-top" :src="post.image_url" alt="image de la publication">
         <div class="card-body p-2">
@@ -37,9 +37,9 @@ export default {
         token: 'token'
     }),
     data() {
-      return {
-        posts:[]
-      }
+        return {
+            posts:[]
+        }
     },
     methods: {
         handlePosting: () => {
@@ -70,5 +70,8 @@ export default {
 <style>
     .postcard{
         background-color: #fff9f4!important;
+    }
+    .username{
+        color: #eb0000!important
     }
 </style>
