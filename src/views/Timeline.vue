@@ -72,7 +72,7 @@ export default {
         background-color: #fff9f4!important;
     }
     .username{
-        color: #eb0000!important
+        color: #820000!important
     }
     .image {
         max-width: 300px;
