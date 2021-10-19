@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-// import router from "../router";
 import store from '../store'
 
 // Vue.use(Router);
@@ -25,13 +23,13 @@ function routeGuard(to, from, next) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Connection',
+    component: () => import('../views/Connection.vue')
   },
   {
     path: '/inscription',
     name: 'Inscription',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Inscription.vue')
+    component: () => import('../views/Inscription.vue')
   },
   {
     path: '/profile/:id?',

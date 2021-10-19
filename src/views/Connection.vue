@@ -1,5 +1,7 @@
 <template>
-<h1>Connexion</h1>
+  <HomeNav></HomeNav>
+
+  <h1>Connexion</h1>
   <div class="d-flex justify-content-center">
     <form @submit.prevent="handleLogin" class="w-75">
       <div class="form-group">
@@ -21,6 +23,8 @@ import router from "../router";
 import Swal from "sweetalert2";
 import store from "../store"
 import { mapState } from 'vuex'
+import HomeNav from '@/components/HomeNav.vue'
+
 
   export default{
     name: "login",
@@ -29,6 +33,9 @@ import { mapState } from 'vuex'
         email:"",
         password:""
       }
+    },
+    components: {
+      HomeNav
     },
     computed: mapState({
       isLoggedin: 'isLoggedin',
@@ -74,9 +81,7 @@ import { mapState } from 'vuex'
           });
         });
       }
-    }
+    },
   }
-
-
-
 </script>
+
