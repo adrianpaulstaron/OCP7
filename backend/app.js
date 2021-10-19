@@ -6,6 +6,8 @@ const cors = require('cors');
 const helmet = require("helmet");
 
 
+/* -------------- SÉCURITÉ -------------- */
+
 /* CROSS ORIGIN RESOURCE SHARING CORS */
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -15,6 +17,17 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
+
+var RateLimit = require('express-rate-limit');
+app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
+var limiter = new RateLimit({
+  windowMs: 15*60*1000, // 15 minutes 
+  max: 50, // limit each IP to 100 requests per windowMs 
+  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+});
+//  apply to all requests 
+app.use(limiter);
+
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -39,15 +52,6 @@ async function CoTest() {
 }
 CoTest()
 
-var RateLimit = require('express-rate-limit');
-app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
-var limiter = new RateLimit({
-  windowMs: 15*60*1000, // 15 minutes 
-  max: 50, // limit each IP to 100 requests per windowMs 
-  delayMs: 0 // disable delaying - full speed until the max limit is reached 
-});
-//  apply to all requests 
-app.use(limiter);
 
 // Middleware
 app.use(express.json())

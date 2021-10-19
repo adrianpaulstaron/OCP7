@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING(200),
       allowNull: false,
+      is: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i,
       validate: {
         notEmpty: true,
       }

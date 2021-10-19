@@ -4,18 +4,23 @@ const db = require('../models');
 
 
 exports.signup = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
-  .then (hash => {
-    const newUser = req.body
-    db.users.create({
-        firstname: newUser.firstname,
-        surname: newUser.surname,
-        email: newUser.email,
-        password: hash
-    }, { fields: ['firstname', 'surname', 'email', 'password'] })
-    .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
-    .catch(error => res.status(400).json({error})); 
-  })
+  let pwdRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    if(pwdRegex.test(req.body.password)){
+      bcrypt.hash(req.body.password, 10)
+      .then (hash => {
+        const newUser = req.body
+        db.users.create({
+            firstname: newUser.firstname,
+            surname: newUser.surname,
+            email: newUser.email,
+            password: hash
+        }, { fields: ['firstname', 'surname', 'email', 'password'] })
+        .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
+        .catch(error => res.status(400).json({error})); 
+      })
+    }else{
+      res.status(400).json({ error: "mot de passe non sécurisé"})
+    }
 }
 
 exports.login = async (req, res, next) => {

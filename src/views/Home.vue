@@ -1,7 +1,6 @@
 <template>
     <HomeNav></HomeNav>
     <Connection></Connection>
-    
 </template>
 
 <script>
@@ -18,16 +17,6 @@ export default {
 </script>
 
 <style>
-  /* a {
-  color: red;
-}
-a:hover {
-   color: #00F
-} */
-
-/* .router-link{
-  color: rgb(240, 20, 20)
-} */
 
 .routerlink{
   color: black!important;

@@ -50,48 +50,59 @@
     },
     methods: {
       handleSignup: function () {
-        axios.post("http://localhost:3001/api/users/signup", { 
+        let pwdRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+        if(pwdRegex.test(this.password)){
+          axios.post("http://localhost:3001/api/users/signup", { 
           firstname: this.firstname, 
           surname: this.surname, 
           email: this.email, 
           password: this.password
         })
-        .catch(function (error) {
-          const codeError = error.message.split("code ")[1];
-          let messageError = "";
-          switch (codeError) {
-            case "401":
-              messageError = "Mot de passe erroné !";
-              break;
-            case "403":
-              messageError =
-                "Le compte associé à cette adresse email a été supprimé !";
-              break;
-            case "404":
-              messageError = "Utilisateur non-trouvé !";
-              break;
-          }
-          Swal.fire({
-            title: "Une erreur est survenue",
-            text: messageError || error.message,
-            icon: "error",
-            timer: 4000,
-            showConfirmButton: false,
-            timerProgressBar: true,
-          });
-        })
-        .then(()=> {
-          axios.post("http://localhost:3001/api/users/login", { 
-            email: this.email, 
-            password: this.password
-        })
-          .then((response) => {
-            const user = response.data
-            console.log(user)
-            store.commit('storeUser', user)
-            router.push("/timeline");
+          .catch(function (error) {
+            const codeError = error.message.split("code ")[1];
+            let messageError = "";
+            switch (codeError) {
+              case "401":
+                messageError = "Mot de passe erroné !";
+                break;
+              case "403":
+                messageError =
+                  "Le compte associé à cette adresse email a été supprimé !";
+                break;
+              case "404":
+                messageError = "Utilisateur non-trouvé !";
+                break;
+            }
+            Swal.fire({
+              title: "Une erreur est survenue",
+              text: messageError || error.message,
+              icon: "error",
+              timer: 4000,
+              showConfirmButton: false,
+              timerProgressBar: true,
+            });
           })
-        })
+          .then(()=> {
+            axios.post("http://localhost:3001/api/users/login", { 
+              email: this.email, 
+              password: this.password
+          })
+            .then((response) => {
+              const user = response.data
+              console.log(user)
+              store.commit('storeUser', user)
+              router.push("/timeline");
+            })
+          })
+        }else{
+          Swal.fire({
+              title: "Votre mot de passe est trop simple.",
+              icon: "error",
+              confirmButtonText: 'OK',
+              timerProgressBar: true,
+            });
+        }
+        
       }
     }
   }
