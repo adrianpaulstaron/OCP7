@@ -17,9 +17,9 @@ module.exports = function(sequelize, DataTypes) {
     text: {
       type: DataTypes.TEXT,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      // validate: {
+      //   notEmpty: true
+      // }
     },
     image_url: {
       type: DataTypes.TEXT,

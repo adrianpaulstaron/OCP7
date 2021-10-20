@@ -50,11 +50,11 @@ export default {
       handleLogout: function () {
         store.commit('logout')
         localStorage.setItem('User', null)
-        console.log("LOGOUT localStorage.getItem('User') => " + localStorage.getItem('User'))
-        if(!this.isLoggedin){
-          this.$router.push({ path: '/' })
-          console.log("je suis dans la condition isLoggedin false")
-        }
+        // console.log("LOGOUT localStorage.getItem('User') => " + localStorage.getItem('User'))
+        // if(!this.isLoggedin){
+        //   // this.$router.push({ path: '/' })
+        //   // console.log("je suis dans la condition isLoggedin false")
+        // }
       },
       toggleNavbar() {
         this.show = !this.show

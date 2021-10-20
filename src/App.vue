@@ -26,7 +26,7 @@ export default {
     },
     getUser(){
       console.log("APP user du local storage => " + localStorage.getItem('User'))
-      if(localStorage.getItem('User') != "null"){
+      if(localStorage.getItem('User') != "null" && localStorage.getItem('User') != null){
         console.log("j'ai trouvé un user en localstorage")
          // on récupère l'User du localStorage
         let userLocalStorage = localStorage.getItem('User')
