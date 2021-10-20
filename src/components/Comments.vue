@@ -100,12 +100,12 @@ export default {
 }
 </script>
 <style>
-label.swal2-checkbox{
-    height: 0px !important;
-    margin: 0px
-}
-.swal2-checkbox {
-    visibility:hidden!important;
-    margin: 0px;
-}
+    label.swal2-checkbox{
+        height: 0px !important;
+        margin: 0px
+    }
+    .swal2-checkbox {
+        visibility:hidden!important;
+        margin: 0px;
+    }
 </style>
