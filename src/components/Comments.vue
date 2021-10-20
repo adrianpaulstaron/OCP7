@@ -74,7 +74,6 @@ export default {
             this.newComment = ""
         },
         handleDeleteComment: function (commentId) {
-
             Swal.fire({
             title: 'Suppression du commentaire',
             text: "Êtes-vous certain de vouloir supprimer le commentaire ?",
@@ -83,7 +82,6 @@ export default {
             cancelButtonColor: '#424242',
             confirmButtonText: 'Oui',
             cancelButtonText: "Non",
-            customClass: 'swal-alert',
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete("http://localhost:3001/api/comments/" + commentId)
@@ -101,8 +99,13 @@ export default {
 
 }
 </script>
-<style scoped>
-.swal-alert {
-    background: black!important
+<style>
+label.swal2-checkbox{
+    height: 0px !important;
+    margin: 0px
+}
+.swal2-checkbox {
+    visibility:hidden!important;
+    margin: 0px;
 }
 </style>
