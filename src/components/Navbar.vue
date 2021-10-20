@@ -27,7 +27,7 @@
 // import Accueil from '@/components/Accueil.vue'
 // import HelloWorld from '@/components/HelloWorld.vue'
 import store from "../store"
-import router from "../router";
+// import router from "../router";
 import { mapState } from 'vuex'
 
 export default {
@@ -47,15 +47,23 @@ export default {
       userId: 'userId'
     }),
   methods: {
-      handleLogout: () => {
+      handleLogout: function () {
         store.commit('logout')
         localStorage.setItem('User', null)
-        console.log("localStorage.getItem('User') => " + localStorage.getItem('User'))
-        router.push("/")
+        console.log("LOGOUT localStorage.getItem('User') => " + localStorage.getItem('User'))
+        if(!this.isLoggedin){
+          this.$router.push({ path: '/' })
+          console.log("je suis dans la condition isLoggedin false")
+        }
       },
       toggleNavbar() {
         this.show = !this.show
       }
   }
+  // beforeMount(){
+  //   if(!this.isLoggedin){
+  //     router.push("/");
+  //   }
+  // }
 }
 </script>

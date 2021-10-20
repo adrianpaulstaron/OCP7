@@ -34,11 +34,12 @@
   import Swal from "sweetalert2";
   import store from "../store"
   import HomeNav from '@/components/HomeNav.vue'
+  import { mapState } from 'vuex'
   
   export default{
     name: "inscription",
     components: {
-            HomeNav
+      HomeNav
     },
     data() {
       return {
@@ -48,6 +49,9 @@
         password:""
       }
     },
+    computed: mapState({
+      isLoggedin: 'isLoggedin',
+    }),
     methods: {
       handleSignup: function () {
         let pwdRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
@@ -80,12 +84,16 @@
         }else{
           Swal.fire({
               title: "Votre mot de passe est trop simple.",
-              icon: "error",
-              confirmButtonText: 'OK',
+              confirmButtonColor: '#b80000',
               timerProgressBar: true,
             });
         }
         
+      },
+    },
+    beforeMount(){
+      if(this.isLoggedin){
+        router.push("/TimeLine");
       }
     }
   }

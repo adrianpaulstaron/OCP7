@@ -82,7 +82,7 @@ export default {
             cancelButtonColor: '#424242',
             confirmButtonText: 'Oui',
             cancelButtonText: "Non"
-            }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete("http://localhost:3001/api/comments/" + commentId)
                 .then(()=>{
@@ -99,3 +99,8 @@ export default {
 
 }
 </script>
+<style scoped>
+.swal2-checkbox{
+    display:none
+}
+</style>

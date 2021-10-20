@@ -52,6 +52,7 @@ import HomeNav from '@/components/HomeNav.vue'
           // console.log("stringifiedUser", stringifiedUser)
           // on set l'item User du localstorage sur cette valeur
           localStorage.setItem('User', stringifiedUser)
+          console.log("LOGIN localStorage.getItem('User') => " + localStorage.getItem('User'))
           const user = response.data
           store.commit('storeUser', user)
           router.push("/timeline");
@@ -82,6 +83,11 @@ import HomeNav from '@/components/HomeNav.vue'
         });
       }
     },
+    beforeMount(){
+      if(this.isLoggedin){
+        router.push("/TimeLine");
+      }
+    }
   }
 </script>
 

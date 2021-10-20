@@ -25,7 +25,7 @@ export default {
       document.documentElement.setAttribute('lang', "fr");
     },
     getUser(){
-      console.log("user du local storage => " + localStorage.getItem('User'))
+      console.log("APP user du local storage => " + localStorage.getItem('User'))
       if(localStorage.getItem('User') != "null"){
         console.log("j'ai trouvé un user en localstorage")
          // on récupère l'User du localStorage
@@ -36,14 +36,17 @@ export default {
         store.commit('storeUser', userJS)
         // router.push("/timeline");
       }
-     
     }
   },
   beforeMount(){
-      this.handler()
-      this.getUser()
+    this.handler()
+    this.getUser()
+  },
+  updated(){
+    if(!this.isLoggedin){
+      this.$router.go()
+    }
   }
-
 }
 
 </script>

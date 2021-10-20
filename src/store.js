@@ -22,14 +22,14 @@ const store = createStore({
       state.isAdmin = user.isAdmin
     },
     logout (state) {
-        // muter l'état
-        state.isLoggedin = false
-        state.firstname = null
-        state.surname = null
-        state.email = null
-        state.token = null
-        state.userId = null
-        state.isAdmin = false
+      // muter l'état
+      state.isLoggedin = false
+      state.firstname = null
+      state.surname = null
+      state.email = null
+      state.token = null
+      state.userId = null
+      state.isAdmin = false
     },
   }
 
