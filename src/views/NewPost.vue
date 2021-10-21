@@ -3,11 +3,11 @@
     <div class="d-flex justify-content-center">
         <form @submit.prevent="handlePosting" class="w-75">
             <div class="form-group">
-                <label for="exampleFormControlInput1">Titre</label>
+                <label class="postLabel" for="exampleFormControlInput1">Titre</label>
                 <input required v-model="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre">
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Texte</label>
+                <label class="postLabel" for="exampleFormControlTextarea1">Texte</label>
                 <textarea v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="input-group mb-3">
@@ -18,7 +18,7 @@
             </div>
             <!-- on vérifie si on a une image -->
             <div v-if="!image">
-                <label for="imageUpload">Selectionner une image (png, jpg, jpeg ou gif)</label>
+                <label class="postLabel" for="imageUpload">Selectionner une image (png, jpg, jpeg ou gif)</label>
                 <!-- on n'autorise que certains fichiers, et on précise qu'on appelle la fonction onFileChange lorsque l'on change le fichier  -->
                 <input id="imageUpload" class="btn btn-info my-2" accept="image/png, image/jpeg, image/gif, image/jpg" type="file" @change="onFileChange">
             </div>
@@ -116,7 +116,7 @@ export default {
     display: block;
     margin-bottom: 10px;
     }
-    label {
+    .postLabel {
         display:block!important;
     }
 </style>
