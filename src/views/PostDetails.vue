@@ -57,7 +57,6 @@ export default {
                 this.post.hour = postTimestamp.getHours()
                 this.post.minute = (postTimestamp.getMinutes()<10?'0':'') + postTimestamp.getMinutes()
                 this.post.created_at = postTimestamp.toLocaleDateString()
-                // this.post.created_at = new Date(this.post.created_at).toLocaleDateString()
             })
         },
         // on crée une fonction pour effacer un post

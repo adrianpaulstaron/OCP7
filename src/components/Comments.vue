@@ -48,11 +48,15 @@ export default {
             axios.get("http://localhost:3001/api/comments/" + this.$route.params.id, {headers: {Authorization: "Bearer " + this.token}})
             .then((response) => {
                     this.comments = response.data
-                    console.log(response.data)
+                    // pour chaque commentaire, on veut obtenir la date dans un format compréhensible
                     this.comments.forEach(comment => {
+                        // on crée une variable commentDate qui transforme en date le timestamp récupéré en bdd
                         var commentDate = new Date(comment.created_at)
+                        // on prend ses heures
                         comment.hour = commentDate.getHours()
+                        // on prend ses minutes, en ajoutant un 0 si jamais elles sont inférieures à 10, afin d'avoir les minutes au format double chiffre
                         comment.minute = (commentDate.getMinutes()<10?'0':'') + commentDate.getMinutes()
+                        // on convertit la date en locale string pour l'avoir au format français
                         comment.created_at = commentDate.toLocaleDateString() 
                     })
             })

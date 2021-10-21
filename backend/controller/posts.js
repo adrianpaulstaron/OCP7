@@ -1,7 +1,6 @@
 const fs = require('fs');
 const db = require('../models');
 
-
 exports.createPost = async (req, res, next) => {
     var imageUrl = null
     console.log("req.file => ", req.file) // undefined
@@ -22,15 +21,16 @@ exports.createPost = async (req, res, next) => {
     }else{
         res.status(400).json({ message: "fichier ou texte manquant" })
     }
-
 }
 
 exports.getPosts = (req, res, next) => {
     let postsArray = new Array()
     db.posts.findAll({ 
         include: {
+            // on indique qu'on veut récupérer les users associés dans la table correspondante grâce à la foreign key
             model: db.users,
             required: true,
+            // on indique ce que l'on veut récupérer des users
             attributes: ["firstname", "surname", "id"]
         },
         limit: 100,
@@ -88,21 +88,21 @@ exports.deletePost = async (req, res, next) => {
             // on supprime donc l'image dont on a obtenu le nom de fichier ainsi
             fs.unlink(`images/${filename}`, () => {
                 db.posts.destroy({
-                where: {
-                  id: postId
-                }
-              })
-              .then(() => res.status(200).json({ message: 'Post effacé' }))
-              .catch(error => res.status(400).json({error})); 
+                    where: {
+                        id: postId
+                    }
+                })
+                .then(() => res.status(200).json({ message: 'Post effacé' }))
+                .catch(error => res.status(400).json({error})); 
             })
         }else{
             db.posts.destroy({
                 where: {
-                  id: postId
+                    d: postId
                 }
-              })
-              .then(() => res.status(200).json({ message: 'Post effacé' }))
-              .catch(error => res.status(400).json({error})); 
+            })
+            .then(() => res.status(200).json({ message: 'Post effacé' }))
+            .catch(error => res.status(400).json({error})); 
         }
         
         

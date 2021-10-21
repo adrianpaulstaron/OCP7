@@ -50,20 +50,20 @@ export default {
       handleLogout: function () {
         store.commit('logout')
         localStorage.setItem('User', null)
-        // console.log("LOGOUT localStorage.getItem('User') => " + localStorage.getItem('User'))
-        // if(!this.isLoggedin){
-        //   // this.$router.push({ path: '/' })
-        //   // console.log("je suis dans la condition isLoggedin false")
-        // }
       },
       toggleNavbar() {
         this.show = !this.show
       }
   }
-  // beforeMount(){
-  //   if(!this.isLoggedin){
-  //     router.push("/");
-  //   }
-  // }
 }
 </script>
+
+<style>
+  nav li:hover,
+  .router-link-active,
+  nav li.router-link-exact-active {
+    color: #c40d00!important;
+    cursor: pointer;
+  }
+
+</style>

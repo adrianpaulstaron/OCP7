@@ -11,10 +11,6 @@
                 <textarea v-model="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="input-group mb-3">
-            <!-- <div class="custom-file">
-                <input type="file" class="custom-file-input" @change="onFileChange" id="inputGroupFile02">
-                <label class="custom-file-label" for="inputGroupFile02">Choisissez une image</label>
-            </div> -->
             </div>
             <!-- on vérifie si on a une image -->
             <div v-if="!image">
