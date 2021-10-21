@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 
-// Vue.use(Router);
-
 // on déclare un garde qui va servir à rediriger vers la page de login lorsque l'on n'est pas authentifié
 function routeGuard(to, from, next) {
   console.log("route guard", store.state.isLoggedin)

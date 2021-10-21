@@ -25,16 +25,13 @@ export default {
       document.documentElement.setAttribute('lang', "fr");
     },
     getUser(){
-      console.log("APP user du local storage => " + localStorage.getItem('User'))
       if(localStorage.getItem('User') != "null" && localStorage.getItem('User') != null){
-        console.log("j'ai trouvé un user en localstorage")
          // on récupère l'User du localStorage
         let userLocalStorage = localStorage.getItem('User')
         // on le transforme en objet javascript
         let userJS = JSON.parse(userLocalStorage)
         // on le met dans le store
         store.commit('storeUser', userJS)
-        // router.push("/timeline");
       }
     }
   },
@@ -43,6 +40,7 @@ export default {
     this.getUser()
   },
   updated(){
+    // à l'update de la page, si isLoggedin est false, on reload la page, ce qui aura donc pour effet de nous rediriger sur le login grâce à notre routeguard
     if(!this.isLoggedin){
       this.$router.go()
     }

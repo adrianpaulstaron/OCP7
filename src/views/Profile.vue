@@ -29,7 +29,7 @@ import router from "../router";
 // import router from "../router";
 
 export default {
-  name: 'Home',
+  name: 'Profil',
   computed: mapState({
       userId: 'userId',
       token: 'token'

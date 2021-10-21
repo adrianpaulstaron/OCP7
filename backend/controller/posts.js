@@ -99,7 +99,7 @@ exports.deletePost = async (req, res, next) => {
         }else{
             db.posts.destroy({
                 where: {
-                    d: postId
+                    id: postId
                 }
             })
             .then(() => res.status(200).json({ message: 'Post effacé' }))
