@@ -16,10 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     text: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      // validate: {
-      //   notEmpty: true
-      // }
+      allowNull: false
     },
     image_url: {
       type: DataTypes.TEXT,

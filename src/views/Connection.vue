@@ -25,7 +25,6 @@ import store from "../store"
 import { mapState } from 'vuex'
 import HomeNav from '@/components/HomeNav.vue'
 
-
   export default{
     name: "login",
     data() {
@@ -49,10 +48,8 @@ import HomeNav from '@/components/HomeNav.vue'
         .then((response) => {
           // on stringify notre réponse pour obtenir un user stockable dans le localStorage
           let stringifiedUser = JSON.stringify(response.data)
-          // console.log("stringifiedUser", stringifiedUser)
           // on set l'item User du localstorage sur cette valeur
           localStorage.setItem('User', stringifiedUser)
-          console.log("LOGIN localStorage.getItem('User') => " + localStorage.getItem('User'))
           const user = response.data
           store.commit('storeUser', user)
           router.push("/timeline");
@@ -62,23 +59,17 @@ import HomeNav from '@/components/HomeNav.vue'
           let messageError = "";
           switch (codeError) {
             case "401":
-              messageError = "Mot de passe erroné !";
-              break;
-            case "403":
-              messageError =
-                "Le compte associé à cette adresse email a été supprimé !";
+              messageError = "Mot de passe erroné";
               break;
             case "404":
-              messageError = "Utilisateur non-trouvé !";
+              messageError = "Utilisateur non-trouvé";
               break;
           }
           Swal.fire({
-            title: "Une erreur est survenue",
-            text: messageError || error.message,
-            icon: "error",
-            timer: 4000,
-            showConfirmButton: false,
-            timerProgressBar: true,
+            title: messageError || error.message,
+            showConfirmButton: true,
+            confirmButtonColor: '#b80000',
+            confirmButtonText: 'OK'
           });
         });
       }

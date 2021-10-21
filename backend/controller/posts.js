@@ -24,6 +24,7 @@ exports.createPost = async (req, res, next) => {
 }
 
 exports.getPosts = (req, res, next) => {
+    // on déclare un array pour y mettre nos publications
     let postsArray = new Array()
     db.posts.findAll({ 
         include: {
@@ -38,10 +39,10 @@ exports.getPosts = (req, res, next) => {
         order: [
             ['id', 'DESC']
         ],
-        
     })
     .then(function(rows) {
         rows.forEach(post => {
+            // on push notre résultat dans notre array
             postsArray.push(post.dataValues)
         })
         res.status(200).json(postsArray)
