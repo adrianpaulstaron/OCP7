@@ -17,11 +17,14 @@ if (config.use_env_variable) {
 
 fs
   .readdirSync(__dirname)
+  // on filtre les fichiers js dans models
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
+    // on require un fichier js et on le met dans une constante model
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
+    // on range dans l'indice qui correspond au nom du model, le model
     db[model.name] = model;
   });
 
@@ -34,24 +37,12 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-
-
-
-
 db.users = require("./users.js")(sequelize, Sequelize)
 db.posts = require("./posts.js")(sequelize, Sequelize)
 db.comments = require("./comments.js")(sequelize, Sequelize)
 
 db.comments.belongsTo(db.posts, {foreignKey: "post_id"})
 db.comments.belongsTo(db.users, {foreignKey: "user_id"})
-// db.posts.hasMany(db.comments)
 db.posts.belongsTo(db.users, {foreignKey: "user_id"})
-// db.users.hasMany(db.posts)
-// db.users.hasMany(db.comments)
-
-
-
-
-
 
 module.exports = db;

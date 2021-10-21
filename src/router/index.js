@@ -3,7 +3,7 @@ import store from '../store'
 
 // on déclare un garde qui va servir à rediriger vers la page de login lorsque l'on n'est pas authentifié
 function routeGuard(to, from, next) {
-  console.log("route guard", store.state.isLoggedin)
+  console.log("utilisateur loggé : ", store.state.isLoggedin)
   // si on n'est pas loggé
   if (store.state.isLoggedin === false) {
     next({
@@ -54,6 +54,7 @@ const routes = [
     component: () => import('../views/PostDetails.vue')
   },
   {
+    // lorsque l'url demandé par l'utilisateur n'existe pas, on le redirige vers le point d'entrée de l'application
     path: '/:pathMatch(.*)*',
     redirect: '/'
   }

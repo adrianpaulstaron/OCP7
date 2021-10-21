@@ -12,7 +12,6 @@ const store = createStore({
   },
   mutations: {
     storeUser (state, user) {
-      // muter l'état
       state.isLoggedin = true
       state.firstname = user.firstname
       state.surname = user.surname
@@ -22,7 +21,6 @@ const store = createStore({
       state.isAdmin = user.isAdmin
     },
     logout (state) {
-      // muter l'état
       state.isLoggedin = false
       state.firstname = null
       state.surname = null

@@ -41,12 +41,13 @@ import HomeNav from '@/components/HomeNav.vue'
     }),
     methods: {
       handleLogin: function () {
+        // axios pour faire des requêtes AJAX
         axios.post("http://localhost:3001/api/users/login", { 
           email: this.email, 
           password: this.password
         })
         .then((response) => {
-          // on stringify notre réponse pour obtenir un user stockable dans le localStorage
+          // on stringify l'objet littéral reçu pour obtenir un user stockable dans le localStorage
           let stringifiedUser = JSON.stringify(response.data)
           // on set l'item User du localstorage sur cette valeur
           localStorage.setItem('User', stringifiedUser)

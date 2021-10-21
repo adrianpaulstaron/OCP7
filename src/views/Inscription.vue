@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
           <label for="inputPassword">Mot de passe</label>
-          <input v-model="password" type="password" class="form-control" id="inputPassword" aria-describedby="pwdHelp" placeholder="votre mot de passe">
+          <input required v-model="password" type="password" class="form-control" id="inputPassword" aria-describedby="pwdHelp" placeholder="votre mot de passe">
           <small id="pwdHelp" class="form-text text-muted">Votre mot de passe doit contenir au moins une lettre et un chiffre, et faire au moins 8 caractères.</small>
         </div>
         <button required type="submit" class="btn btn-dark">S'Inscrire</button>
